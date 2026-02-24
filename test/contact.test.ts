@@ -1,12 +1,12 @@
-import {ContactTest, UserTest} from "./test-util";
-import supertest from "supertest";
-import {web} from "../src/application/web";
-import {logger} from "../src/application/logging";
-import {afterEach, beforeEach, describe, expect, it} from "@jest/globals";
+import { ContactTest, UserTest } from './test-util';
+import supertest from 'supertest';
+import { web } from '../src/application/web';
+import { logger } from '../src/application/logging';
+import { afterEach, beforeEach, describe, expect, it } from '@jest/globals';
 
 describe('POST /api/contacts', () => {
     beforeEach(async () => {
-        await UserTest.create()
+        await UserTest.create();
     });
 
     afterEach(async () => {
@@ -16,33 +16,33 @@ describe('POST /api/contacts', () => {
 
     it('should create new contact', async () => {
         const response = await supertest(web)
-            .post("/api/contacts")
-            .set("X-API-TOKEN", "test")
+            .post('/api/contacts')
+            .set('X-API-TOKEN', 'test')
             .send({
-                first_name : "eko",
-                last_name: "khannedy",
-                email: "eko@example.com",
-                phone: "0899999"
+                first_name: 'eko',
+                last_name: 'khannedy',
+                email: 'eko@example.com',
+                phone: '0899999',
             });
 
         logger.debug(response.body);
         expect(response.status).toBe(200);
         expect(response.body.data.id).toBeDefined();
-        expect(response.body.data.first_name).toBe("eko");
-        expect(response.body.data.last_name).toBe("khannedy");
-        expect(response.body.data.email).toBe("eko@example.com");
-        expect(response.body.data.phone).toBe("0899999");
+        expect(response.body.data.first_name).toBe('eko');
+        expect(response.body.data.last_name).toBe('khannedy');
+        expect(response.body.data.email).toBe('eko@example.com');
+        expect(response.body.data.phone).toBe('0899999');
     });
 
     it('should reject create new contact if data is invalid', async () => {
         const response = await supertest(web)
-            .post("/api/contacts")
-            .set("X-API-TOKEN", "test")
+            .post('/api/contacts')
+            .set('X-API-TOKEN', 'test')
             .send({
-                first_name : "",
-                last_name: "",
-                email: "eko",
-                phone: "08999990899999089999908999990899999"
+                first_name: '',
+                last_name: '',
+                email: 'eko',
+                phone: '08999990899999089999908999990899999',
             });
 
         logger.debug(response.body);
@@ -52,9 +52,8 @@ describe('POST /api/contacts', () => {
 });
 
 describe('GET /api/contacts/:contactId', () => {
-
     beforeEach(async () => {
-        await UserTest.create()
+        await UserTest.create();
         await ContactTest.create();
     });
 
@@ -67,7 +66,7 @@ describe('GET /api/contacts/:contactId', () => {
         const contact = await ContactTest.get();
         const response = await supertest(web)
             .get(`/api/contacts/${contact.id}`)
-            .set("X-API-TOKEN", "test");
+            .set('X-API-TOKEN', 'test');
 
         logger.debug(response.body);
         expect(response.status).toBe(200);
@@ -82,18 +81,17 @@ describe('GET /api/contacts/:contactId', () => {
         const contact = await ContactTest.get();
         const response = await supertest(web)
             .get(`/api/contacts/${contact.id + 1}`)
-            .set("X-API-TOKEN", "test");
+            .set('X-API-TOKEN', 'test');
 
         logger.debug(response.body);
         expect(response.status).toBe(404);
         expect(response.body.errors).toBeDefined();
     });
-
 });
 
 describe('PUT /api/contacts/:contactId', () => {
     beforeEach(async () => {
-        await UserTest.create()
+        await UserTest.create();
         await ContactTest.create();
     });
 
@@ -106,33 +104,33 @@ describe('PUT /api/contacts/:contactId', () => {
         const contact = await ContactTest.get();
         const response = await supertest(web)
             .put(`/api/contacts/${contact.id}`)
-            .set("X-API-TOKEN", 'test')
+            .set('X-API-TOKEN', 'test')
             .send({
-                first_name: "eko",
-                last_name: "khannedy",
-                email: "eko@example.com",
-                phone: "9999"
+                first_name: 'eko',
+                last_name: 'khannedy',
+                email: 'eko@example.com',
+                phone: '9999',
             });
 
         logger.debug(response.body);
         expect(response.status).toBe(200);
         expect(response.body.data.id).toBe(contact.id);
-        expect(response.body.data.first_name).toBe("eko");
-        expect(response.body.data.last_name).toBe("khannedy");
-        expect(response.body.data.email).toBe("eko@example.com");
-        expect(response.body.data.phone).toBe("9999");
+        expect(response.body.data.first_name).toBe('eko');
+        expect(response.body.data.last_name).toBe('khannedy');
+        expect(response.body.data.email).toBe('eko@example.com');
+        expect(response.body.data.phone).toBe('9999');
     });
 
     it('should reject update contact if request is invalid', async () => {
         const contact = await ContactTest.get();
         const response = await supertest(web)
             .put(`/api/contacts/${contact.id}`)
-            .set("X-API-TOKEN", 'test')
+            .set('X-API-TOKEN', 'test')
             .send({
-                first_name: "",
-                last_name: "",
-                email: "eko",
-                phone: ""
+                first_name: '',
+                last_name: '',
+                email: 'eko',
+                phone: '',
             });
 
         logger.debug(response.body);
@@ -143,7 +141,7 @@ describe('PUT /api/contacts/:contactId', () => {
 
 describe('DELETE /api/contacts/:contactId', () => {
     beforeEach(async () => {
-        await UserTest.create()
+        await UserTest.create();
         await ContactTest.create();
     });
 
@@ -156,18 +154,18 @@ describe('DELETE /api/contacts/:contactId', () => {
         const contact = await ContactTest.get();
         const response = await supertest(web)
             .delete(`/api/contacts/${contact.id}`)
-            .set("X-API-TOKEN", "test");
+            .set('X-API-TOKEN', 'test');
 
         logger.debug(response.body);
         expect(response.status).toBe(200);
-        expect(response.body.data).toBe("OK");
+        expect(response.body.data).toBe('OK');
     });
 
     it('should reject remove contact if contact is not found', async () => {
         const contact = await ContactTest.get();
         const response = await supertest(web)
             .delete(`/api/contacts/${contact.id + 1}`)
-            .set("X-API-TOKEN", "test");
+            .set('X-API-TOKEN', 'test');
 
         logger.debug(response.body);
         expect(response.status).toBe(404);
@@ -177,7 +175,7 @@ describe('DELETE /api/contacts/:contactId', () => {
 
 describe('GET /api/contacts', () => {
     beforeEach(async () => {
-        await UserTest.create()
+        await UserTest.create();
         await ContactTest.create();
     });
 
@@ -188,8 +186,8 @@ describe('GET /api/contacts', () => {
 
     it('should be able to search contact', async () => {
         const response = await supertest(web)
-            .get("/api/contacts")
-            .set("X-API-TOKEN", "test");
+            .get('/api/contacts')
+            .set('X-API-TOKEN', 'test');
 
         logger.debug(response.body);
         expect(response.status).toBe(200);
@@ -201,11 +199,11 @@ describe('GET /api/contacts', () => {
 
     it('should be able to search contact using name', async () => {
         const response = await supertest(web)
-            .get("/api/contacts")
+            .get('/api/contacts')
             .query({
-                name: "es"
+                name: 'es',
             })
-            .set("X-API-TOKEN", "test");
+            .set('X-API-TOKEN', 'test');
 
         logger.debug(response.body);
         expect(response.status).toBe(200);
@@ -217,11 +215,11 @@ describe('GET /api/contacts', () => {
 
     it('should be able to search contact using email', async () => {
         const response = await supertest(web)
-            .get("/api/contacts")
+            .get('/api/contacts')
             .query({
-                email: ".com"
+                email: '.com',
             })
-            .set("X-API-TOKEN", "test");
+            .set('X-API-TOKEN', 'test');
 
         logger.debug(response.body);
         expect(response.status).toBe(200);
@@ -233,11 +231,11 @@ describe('GET /api/contacts', () => {
 
     it('should be able to search contact using phone', async () => {
         const response = await supertest(web)
-            .get("/api/contacts")
+            .get('/api/contacts')
             .query({
-                phone: "99"
+                phone: '99',
             })
-            .set("X-API-TOKEN", "test");
+            .set('X-API-TOKEN', 'test');
 
         logger.debug(response.body);
         expect(response.status).toBe(200);
@@ -249,11 +247,11 @@ describe('GET /api/contacts', () => {
 
     it('should be able to search contact no result', async () => {
         const response = await supertest(web)
-            .get("/api/contacts")
+            .get('/api/contacts')
             .query({
-                name: "salah"
+                name: 'salah',
             })
-            .set("X-API-TOKEN", "test");
+            .set('X-API-TOKEN', 'test');
 
         logger.debug(response.body);
         expect(response.status).toBe(200);
@@ -265,12 +263,12 @@ describe('GET /api/contacts', () => {
 
     it('should be able to search contact with paging', async () => {
         const response = await supertest(web)
-            .get("/api/contacts")
+            .get('/api/contacts')
             .query({
                 page: 2,
-                size: 1
+                size: 1,
             })
-            .set("X-API-TOKEN", "test");
+            .set('X-API-TOKEN', 'test');
 
         logger.debug(response.body);
         expect(response.status).toBe(200);

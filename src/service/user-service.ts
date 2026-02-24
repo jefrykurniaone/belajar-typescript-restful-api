@@ -3,35 +3,40 @@ import {
     LoginUserRequest,
     toUserResponse,
     UpdateUserRequest,
-    UserResponse
-} from "../model/user-model";
-import {Validation} from "../validation/validation";
-import {UserValidation} from "../validation/user-validation";
-import {prismaClient} from "../application/database";
-import {ResponseError} from "../error/response-error";
-import bcrypt from "bcrypt";
-import {v4 as uuid} from "uuid";
-import {User} from "@prisma/client";
+    UserResponse,
+} from '../model/user-model';
+import { Validation } from '../validation/validation';
+import { UserValidation } from '../validation/user-validation';
+import { prismaClient } from '../application/database';
+import { ResponseError } from '../error/response-error';
+import bcrypt from 'bcrypt';
+import { v4 as uuid } from 'uuid';
+import { User } from '@prisma/client';
 
 export class UserService {
-
     static async register(request: CreateUserRequest): Promise<UserResponse> {
-        const registerRequest = Validation.validate(UserValidation.REGISTER, request);
+        const registerRequest = Validation.validate(
+            UserValidation.REGISTER,
+            request,
+        );
 
         const totalUserWithSameUsername = await prismaClient.user.count({
             where: {
-                username: registerRequest.username
-            }
+                username: registerRequest.username,
+            },
         });
 
         if (totalUserWithSameUsername != 0) {
-            throw new ResponseError(400, "Username already exists");
+            throw new ResponseError(400, 'Username already exists');
         }
 
-        registerRequest.password = await bcrypt.hash(registerRequest.password, 10);
+        registerRequest.password = await bcrypt.hash(
+            registerRequest.password,
+            10,
+        );
 
         const user = await prismaClient.user.create({
-            data: registerRequest
+            data: registerRequest,
         });
 
         return toUserResponse(user);
@@ -42,26 +47,29 @@ export class UserService {
 
         let user = await prismaClient.user.findUnique({
             where: {
-                username: loginRequest.username
-            }
+                username: loginRequest.username,
+            },
         });
 
         if (!user) {
-            throw new ResponseError(401, "Username or password is wrong");
+            throw new ResponseError(401, 'Username or password is wrong');
         }
 
-        const isPasswordValid = await bcrypt.compare(loginRequest.password, user.password);
+        const isPasswordValid = await bcrypt.compare(
+            loginRequest.password,
+            user.password,
+        );
         if (!isPasswordValid) {
-            throw new ResponseError(401, "Username or password is wrong");
+            throw new ResponseError(401, 'Username or password is wrong');
         }
 
         user = await prismaClient.user.update({
             where: {
-                username: loginRequest.username
+                username: loginRequest.username,
             },
             data: {
-                token: uuid()
-            }
+                token: uuid(),
+            },
         });
 
         const response = toUserResponse(user);
@@ -73,8 +81,14 @@ export class UserService {
         return toUserResponse(user);
     }
 
-    static async update(user: User, request: UpdateUserRequest): Promise<UserResponse> {
-        const updateRequest = Validation.validate(UserValidation.UPDATE, request);
+    static async update(
+        user: User,
+        request: UpdateUserRequest,
+    ): Promise<UserResponse> {
+        const updateRequest = Validation.validate(
+            UserValidation.UPDATE,
+            request,
+        );
 
         if (updateRequest.name) {
             user.name = updateRequest.name;
@@ -86,9 +100,9 @@ export class UserService {
 
         const result = await prismaClient.user.update({
             where: {
-                username: user.username
+                username: user.username,
             },
-            data: user
+            data: user,
         });
 
         return toUserResponse(result);
@@ -97,14 +111,13 @@ export class UserService {
     static async logout(user: User): Promise<UserResponse> {
         const result = await prismaClient.user.update({
             where: {
-                username: user.username
+                username: user.username,
             },
             data: {
-                token: null
-            }
+                token: null,
+            },
         });
 
         return toUserResponse(result);
     }
-
 }

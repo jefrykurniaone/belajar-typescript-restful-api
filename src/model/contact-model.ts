@@ -1,4 +1,4 @@
-import {Contact} from "@prisma/client";
+import { Contact } from '@prisma/client';
 
 export type ContactResponse = {
     id: number;
@@ -6,14 +6,14 @@ export type ContactResponse = {
     last_name?: string | null;
     email?: string | null;
     phone?: string | null;
-}
+};
 
 export type CreateContactRequest = {
     first_name: string;
     last_name?: string;
     email?: string;
     phone?: string;
-}
+};
 
 export type UpdateContactRequest = {
     id: number;
@@ -21,7 +21,7 @@ export type UpdateContactRequest = {
     last_name?: string;
     email?: string;
     phone?: string;
-}
+};
 
 export type SearchContactRequest = {
     name?: string;
@@ -29,7 +29,7 @@ export type SearchContactRequest = {
     email?: string;
     page: number;
     size: number;
-}
+};
 
 export function toContactResponse(contact: Contact): ContactResponse {
     return {
@@ -37,6 +37,6 @@ export function toContactResponse(contact: Contact): ContactResponse {
         first_name: contact.first_name,
         last_name: contact.last_name,
         email: contact.email,
-        phone: contact.phone
-    }
+        phone: contact.phone,
+    };
 }
