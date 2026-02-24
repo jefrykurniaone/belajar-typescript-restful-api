@@ -2,6 +2,7 @@ import {ContactTest, UserTest} from "./test-util";
 import supertest from "supertest";
 import {web} from "../src/application/web";
 import {logger} from "../src/application/logging";
+import {afterEach, beforeEach, describe, expect, it} from "@jest/globals";
 
 describe('POST /api/contacts', () => {
     beforeEach(async () => {

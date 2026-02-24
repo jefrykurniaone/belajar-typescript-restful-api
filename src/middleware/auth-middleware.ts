@@ -1,15 +1,19 @@
-import {Request, Response, NextFunction} from "express";
-import {prismaClient} from "../application/database";
-import {UserRequest} from "../type/user-request";
+import { Request, Response, NextFunction } from 'express';
+import { prismaClient } from '../application/database';
+import { UserRequest } from '../type/user-request';
 
-export const authMiddleware = async (req: UserRequest, res: Response, next: NextFunction) => {
+export const authMiddleware = async (
+    req: UserRequest,
+    res: Response,
+    next: NextFunction,
+) => {
     const token = req.get('X-API-TOKEN');
 
     if (token) {
         const user = await prismaClient.user.findFirst({
             where: {
-                token: token
-            }
+                token: token,
+            },
         });
 
         if (user) {
@@ -19,7 +23,9 @@ export const authMiddleware = async (req: UserRequest, res: Response, next: Next
         }
     }
 
-    res.status(401).json({
-        errors: "Unauthorized"
-    }).end();
-}
+    res.status(401)
+        .json({
+            errors: 'Unauthorized',
+        })
+        .end();
+};
