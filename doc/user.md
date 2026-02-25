@@ -8,9 +8,9 @@ Request Body :
 
 ```json
 {
-  "username" : "khannedy",
-  "password" : "rahasia",
-  "name" : "Eko Khannedy"
+    "username": "username",
+    "password": "password",
+    "name": "Jefry Kurniawan"
 }
 ```
 
@@ -18,10 +18,10 @@ Response Body (Success) :
 
 ```json
 {
-  "data" : {
-    "username" : "khannedy",
-    "name" : "Eko Khannedy"
-  }
+    "data": {
+        "username": "username",
+        "name": "Jefry Kurniawan"
+    }
 }
 ```
 
@@ -29,7 +29,7 @@ Response Body (Failed) :
 
 ```json
 {
-  "errors" : "Username must not blank, ..."
+    "errors": "Username must not blank, ..."
 }
 ```
 
@@ -41,8 +41,8 @@ Request Body :
 
 ```json
 {
-  "username" : "khannedy",
-  "password" : "rahasia"
+    "username": "username",
+    "password": "password"
 }
 ```
 
@@ -50,11 +50,11 @@ Response Body (Success) :
 
 ```json
 {
-  "data" : {
-    "username" : "khannedy",
-    "name" : "Eko Khannedy",
-    "token" : "uuid"
-  }
+    "data": {
+        "username": "username",
+        "name": "Jefry Kurniawan",
+        "token": "uuid"
+    }
 }
 ```
 
@@ -62,7 +62,7 @@ Response Body (Failed) :
 
 ```json
 {
-  "errors" : "Username or password wrong, ..."
+    "errors": "Username or password wrong, ..."
 }
 ```
 
@@ -71,16 +71,17 @@ Response Body (Failed) :
 Endpoint : GET /api/users/current
 
 Request Header :
+
 - X-API-TOKEN : token
 
 Response Body (Success) :
 
 ```json
 {
-  "data" : {
-    "username" : "khannedy",
-    "name" : "Eko Khannedy"
-  }
+    "data": {
+        "username": "username",
+        "name": "Jefry Kurniawan"
+    }
 }
 ```
 
@@ -88,7 +89,7 @@ Response Body (Failed) :
 
 ```json
 {
-  "errors" : "Unauthorized, ..."
+    "errors": "Unauthorized, ..."
 }
 ```
 
@@ -97,14 +98,15 @@ Response Body (Failed) :
 Endpoint : PATCH /api/users/current
 
 Request Header :
+
 - X-API-TOKEN : token
 
 Request Body :
 
 ```json
 {
-  "password" : "rahasia", // tidak wajib
-  "name" : "Eko Khannedy" // tidak wajib
+    "password": "password", // optional
+    "name": "Jefry Kurniawwan" // optional
 }
 ```
 
@@ -112,10 +114,10 @@ Response Body (Success) :
 
 ```json
 {
-  "data" : {
-    "username" : "khannedy",
-    "name" : "Eko Khannedy"
-  }
+    "data": {
+        "username": "username",
+        "name": "Jefry Kurniawan"
+    }
 }
 ```
 
@@ -123,7 +125,7 @@ Response Body (Failed) :
 
 ```json
 {
-  "errors" : "Unauthorized, ..."
+    "errors": "Unauthorized, ..."
 }
 ```
 
@@ -132,13 +134,14 @@ Response Body (Failed) :
 Endpoint : DELETE /api/users/current
 
 Request Header :
+
 - X-API-TOKEN : token
 
 Response Body (Success) :
 
 ```json
 {
-  "data" : "OK"
+    "data": "OK"
 }
 ```
 
@@ -146,6 +149,6 @@ Response Body (Failed) :
 
 ```json
 {
-  "errors" : "Unauthorized, ..."
+    "errors": "Unauthorized, ..."
 }
 ```

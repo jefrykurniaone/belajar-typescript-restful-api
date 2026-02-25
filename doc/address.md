@@ -5,40 +5,41 @@
 Endpoint : POST /api/contacts/:idContact/addresses
 
 Request Header :
+
 - X-API-TOKEN : token
 
 Request Body :
 
 ```json
 {
-  "street" : "Jalan Apa",
-  "city" : "Kota Apa",
-  "province" : "Provinsi Apa",
-  "country" : "Negara Apa",
-  "postal_code" : "23123"
+    "street": "Jalan Apa",
+    "city": "Kota Apa",
+    "province": "Provinsi Apa",
+    "country": "Negara Apa",
+    "postal_code": "23123"
 }
 ```
 
-Response Body (Success) : 
+Response Body (Success) :
 
 ```json
 {
-  "data" : {
-    "id" : 1,
-    "street" : "Jalan Apa",
-    "city" : "Kota Apa",
-    "province" : "Provinsi Apa",
-    "country" : "Negara Apa",
-    "postal_code" : "23123"
-  }
+    "data": {
+        "id": 1,
+        "street": "Jalan Apa",
+        "city": "Kota Apa",
+        "province": "Provinsi Apa",
+        "country": "Negara Apa",
+        "postal_code": "23123"
+    }
 }
 ```
 
-Response Body (Failed) : 
+Response Body (Failed) :
 
 ```json
 {
-  "errors" : "postal_code is required"
+    "errors": "postal_code is required"
 }
 ```
 
@@ -47,28 +48,29 @@ Response Body (Failed) :
 Endpoint : GET /api/contacts/:idContact/addresses/:idAddress
 
 Request Header :
+
 - X-API-TOKEN : token
 
 Response Body (Success) :
 
 ```json
 {
-  "data" : {
-    "id" : 1,
-    "street" : "Jalan Apa",
-    "city" : "Kota Apa",
-    "province" : "Provinsi Apa",
-    "country" : "Negara Apa",
-    "postal_code" : "23123"
-  }
+    "data": {
+        "id": 1,
+        "street": "Jalan Apa",
+        "city": "Kota Apa",
+        "province": "Provinsi Apa",
+        "country": "Negara Apa",
+        "postal_code": "23123"
+    }
 }
 ```
 
-Response Body (Failed) : 
+Response Body (Failed) :
 
 ```json
 {
-  "errors" : "Address is not found"
+    "errors": "Address is not found"
 }
 ```
 
@@ -77,17 +79,18 @@ Response Body (Failed) :
 Endpoint : PUT /api/contacts/:idContact/addresses/:idAddress
 
 Request Header :
+
 - X-API-TOKEN : token
 
 Request Body :
 
 ```json
 {
-  "street" : "Jalan Apa",
-  "city" : "Kota Apa",
-  "province" : "Provinsi Apa",
-  "country" : "Negara Apa",
-  "postal_code" : "23123"
+    "street": "Jalan Apa",
+    "city": "Kota Apa",
+    "province": "Provinsi Apa",
+    "country": "Negara Apa",
+    "postal_code": "23123"
 }
 ```
 
@@ -95,14 +98,14 @@ Response Body (Success) :
 
 ```json
 {
-  "data" : {
-    "id" : 1,
-    "street" : "Jalan Apa",
-    "city" : "Kota Apa",
-    "province" : "Provinsi Apa",
-    "country" : "Negara Apa",
-    "postal_code" : "23123"
-  }
+    "data": {
+        "id": 1,
+        "street": "Jalan Apa",
+        "city": "Kota Apa",
+        "province": "Provinsi Apa",
+        "country": "Negara Apa",
+        "postal_code": "23123"
+    }
 }
 ```
 
@@ -110,7 +113,7 @@ Response Body (Failed) :
 
 ```json
 {
-  "errors" : "postal_code is required"
+    "errors": "postal_code is required"
 }
 ```
 
@@ -119,13 +122,14 @@ Response Body (Failed) :
 Endpoint : DELETE /api/contacts/:idContact/addresses/:idAddress
 
 Request Header :
+
 - X-API-TOKEN : token
 
 Response Body (Success) :
 
 ```json
 {
-  "data" : "OK"
+    "data": "OK"
 }
 ```
 
@@ -133,7 +137,7 @@ Response Body (Failed) :
 
 ```json
 {
-  "errors" : "Address is not found"
+    "errors": "Address is not found"
 }
 ```
 
@@ -142,30 +146,31 @@ Response Body (Failed) :
 Endpoint : GET /api/contacts/:idContact/addresses
 
 Request Header :
+
 - X-API-TOKEN : token
 
 Response Body (Success) :
 
 ```json
 {
-  "data" : [
-    {
-      "id" : 1,
-      "street" : "Jalan Apa",
-      "city" : "Kota Apa",
-      "province" : "Provinsi Apa",
-      "country" : "Negara Apa",
-      "postal_code" : "23123"
-    },
-    {
-      "id" : 2,
-      "street" : "Jalan Apa",
-      "city" : "Kota Apa",
-      "province" : "Provinsi Apa",
-      "country" : "Negara Apa",
-      "postal_code" : "23123"
-    }
-  ]
+    "data": [
+        {
+            "id": 1,
+            "street": "Jalan Apa",
+            "city": "Kota Apa",
+            "province": "Provinsi Apa",
+            "country": "Negara Apa",
+            "postal_code": "23123"
+        },
+        {
+            "id": 2,
+            "street": "Jalan Apa",
+            "city": "Kota Apa",
+            "province": "Provinsi Apa",
+            "country": "Negara Apa",
+            "postal_code": "23123"
+        }
+    ]
 }
 ```
 
@@ -173,6 +178,6 @@ Response Body (Failed) :
 
 ```json
 {
-  "errors" : "Contact is not found"
+    "errors": "Contact is not found"
 }
 ```

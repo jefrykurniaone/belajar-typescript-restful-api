@@ -2,8 +2,8 @@
 
 Create .env file
 
-```
-DATABASE_URL="sqlserver://localhost;database=restful_api_typescript;user=db-user;password=db-password;trustServerCertificate=true"
+```dotenv
+DATABASE_URL="sqlserver://localhost;database=restful_api_typescript;user=your-db-user;password=your-db-password;trustServerCertificate=true"
 ```
 
 ```shell
