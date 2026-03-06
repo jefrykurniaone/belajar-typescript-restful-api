@@ -19,18 +19,18 @@ describe('POST /api/contacts', () => {
             .post('/api/contacts')
             .set('X-API-TOKEN', 'test')
             .send({
-                first_name: 'eko',
-                last_name: 'khannedy',
-                email: 'eko@example.com',
+                first_name: 'Jefry',
+                last_name: 'Kurniawan',
+                email: 'jefry@example.com',
                 phone: '0899999',
             });
 
         logger.debug(response.body);
         expect(response.status).toBe(200);
         expect(response.body.data.id).toBeDefined();
-        expect(response.body.data.first_name).toBe('eko');
-        expect(response.body.data.last_name).toBe('khannedy');
-        expect(response.body.data.email).toBe('eko@example.com');
+        expect(response.body.data.first_name).toBe('Jefry');
+        expect(response.body.data.last_name).toBe('Kurniawan');
+        expect(response.body.data.email).toBe('jefry@example.com');
         expect(response.body.data.phone).toBe('0899999');
     });
 
@@ -41,7 +41,7 @@ describe('POST /api/contacts', () => {
             .send({
                 first_name: '',
                 last_name: '',
-                email: 'eko',
+                email: 'jefry',
                 phone: '08999990899999089999908999990899999',
             });
 
@@ -106,18 +106,18 @@ describe('PUT /api/contacts/:contactId', () => {
             .put(`/api/contacts/${contact.id}`)
             .set('X-API-TOKEN', 'test')
             .send({
-                first_name: 'eko',
-                last_name: 'khannedy',
-                email: 'eko@example.com',
+                first_name: 'Jefry',
+                last_name: 'Kurniawan',
+                email: 'jefry@example.com',
                 phone: '9999',
             });
 
         logger.debug(response.body);
         expect(response.status).toBe(200);
         expect(response.body.data.id).toBe(contact.id);
-        expect(response.body.data.first_name).toBe('eko');
-        expect(response.body.data.last_name).toBe('khannedy');
-        expect(response.body.data.email).toBe('eko@example.com');
+        expect(response.body.data.first_name).toBe('Jefry');
+        expect(response.body.data.last_name).toBe('Kurniawan');
+        expect(response.body.data.email).toBe('jefry@example.com');
         expect(response.body.data.phone).toBe('9999');
     });
 
@@ -129,7 +129,7 @@ describe('PUT /api/contacts/:contactId', () => {
             .send({
                 first_name: '',
                 last_name: '',
-                email: 'eko',
+                email: 'Jefry',
                 phone: '',
             });
 
